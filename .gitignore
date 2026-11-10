@@ -28,3 +28,8 @@ target
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# Dabbler router machine-side state: the run ledger records each
+# verification round after the tree it describes, so committing it
+# makes verified work look like it changed post-verification.
+.dabbler/
