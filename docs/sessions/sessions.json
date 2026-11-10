@@ -48,9 +48,9 @@
     {
       "number": 3,
       "title": "The calculator page",
-      "status": "in-progress",
+      "status": "complete",
       "startedAt": "2026-11-10T18:54:19.030000-05:00",
-      "completedAt": null,
+      "completedAt": "2026-11-10T18:56:18.262000-05:00",
       "orchestrator": {
         "engine": "claude-code",
         "provider": "anthropic",
