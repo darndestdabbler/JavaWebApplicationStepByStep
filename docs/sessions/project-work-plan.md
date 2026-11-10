@@ -15,7 +15,7 @@ The numbered sessions are declared from `session-plan.md`; each one's task is wh
 | 1 | Author or import the change plan | no | 2026-11-10 |
 | 2 | Break the change plan into numbered sessions | no | 2026-11-10 |
 | 3 | The calculator page | no | 2026-11-10 |
-| 4 | Documentation comments on the calculator | — | not declared |
+| 4 | Documentation comments on the calculator | no | 2026-11-10 |
 
 ### Session 1 — Author or import the change plan
 
@@ -34,3 +34,9 @@ Session 2 appends two numbered sessions to docs/sessions/session-plan.md from do
 **Releasable: no.**
 
 Session 3 adds an online calculator page to the servlet WAR inside its existing shape: src/main/java/com/in28minutes/calculator/Calculator.java (add and subtract over BigDecimal), src/main/java/com/in28minutes/calculator/CalculatorServlet.java mapped with @WebServlet to /calculator.do (GET forwards to the view; POST sets sum and difference and forwards), the view src/main/webapp/WEB-INF/views/calculator.jsp with the shared fragments, a Calculator link in src/main/webapp/WEB-INF/common/navigation.jspf, and the repository's first test: JUnit 4.13.2 as a test-scoped dependency in pom.xml and src/test/java/com/in28minutes/calculator/CalculatorTest.java. Everything compiles at the repository's own Java 7; each step is shown by mvn -q test.
+
+### Session 4 — Documentation comments on the calculator
+
+**Releasable: no.**
+
+Session 4 adds documentation comments to what session 3 added and changes nothing else: Javadoc on Calculator, add and subtract in src/main/java/com/in28minutes/calculator/Calculator.java and on CalculatorServlet, doGet and doPost in src/main/java/com/in28minutes/calculator/CalculatorServlet.java, and a JSP comment at the top of src/main/webapp/WEB-INF/views/calculator.jsp. Each step is shown by mvn -q test and by a check that the diff of its files against HEAD only adds comment lines.

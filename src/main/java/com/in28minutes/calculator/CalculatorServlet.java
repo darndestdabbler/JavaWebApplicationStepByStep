@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * The calculator page at {@code /calculator.do}: a form for two numbers, and
+ * their sum and difference once it is posted.
+ */
 @WebServlet(urlPatterns = "/calculator.do")
 public class CalculatorServlet extends HttpServlet {
 
@@ -16,11 +20,18 @@ public class CalculatorServlet extends HttpServlet {
 
 	private Calculator calculator = new Calculator();
 
+	/**
+	 * Shows the calculator form with no result.
+	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 
+	/**
+	 * Reads {@code left} and {@code right}, and shows their sum and
+	 * difference, or a message when either is not a number.
+	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String left = request.getParameter("left");

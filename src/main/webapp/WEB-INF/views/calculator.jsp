@@ -1,3 +1,5 @@
+<%-- The calculator page: two numbers in, their sum and difference out,
+     posted to CalculatorServlet at /calculator.do. --%>
 <%@ include file="../common/header.jspf"%>
 <%@ include file="../common/navigation.jspf"%>
 

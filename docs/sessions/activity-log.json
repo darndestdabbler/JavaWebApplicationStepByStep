@@ -22,6 +22,13 @@
       "dateTime": "2026-11-10T18:54:39.518000-05:00",
       "task": "Session 3 adds an online calculator page to the servlet WAR inside its existing shape: src/main/java/com/in28minutes/calculator/Calculator.java (add and subtract over BigDecimal), src/main/java/com/in28minutes/calculator/CalculatorServlet.java mapped with @WebServlet to /calculator.do (GET forwards to the view; POST sets sum and difference and forwards), the view src/main/webapp/WEB-INF/views/calculator.jsp with the shared fragments, a Calculator link in src/main/webapp/WEB-INF/common/navigation.jspf, and the repository's first test: JUnit 4.13.2 as a test-scoped dependency in pom.xml and src/test/java/com/in28minutes/calculator/CalculatorTest.java. Everything compiles at the repository's own Java 7; each step is shown by mvn -q test.",
       "releasable": false
+    },
+    {
+      "kind": "task-declaration",
+      "sessionNumber": 4,
+      "dateTime": "2026-11-10T18:56:58.693000-05:00",
+      "task": "Session 4 adds documentation comments to what session 3 added and changes nothing else: Javadoc on Calculator, add and subtract in src/main/java/com/in28minutes/calculator/Calculator.java and on CalculatorServlet, doGet and doPost in src/main/java/com/in28minutes/calculator/CalculatorServlet.java, and a JSP comment at the top of src/main/webapp/WEB-INF/views/calculator.jsp. Each step is shown by mvn -q test and by a check that the diff of its files against HEAD only adds comment lines.",
+      "releasable": false
     }
   ]
 }
