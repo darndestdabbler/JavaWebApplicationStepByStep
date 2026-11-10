@@ -77,3 +77,30 @@ packaging.
 
 > Do NOT hand-author `sessions.json`. The first `session start`
 > bootstraps it from this plan — state files are the writers' job.
+
+### Session 3: The calculator page
+
+1. Register.
+2. Add `src/main/java/com/in28minutes/calculator/Calculator.java`, a class
+   with `add` and `subtract`, each taking two `BigDecimal`s and returning
+   their sum or difference, compiled at Java 7 like the rest.
+3. Add `src/main/java/com/in28minutes/calculator/CalculatorServlet.java`,
+   mapped with `@WebServlet` to `/calculator.do`: GET forwards to the view,
+   POST reads `left` and `right`, sets `sum` and `difference` on the
+   request and forwards to the view. Add the view,
+   `src/main/webapp/WEB-INF/views/calculator.jsp`, including the shared
+   header, navigation and footer, and a Calculator link in
+   `src/main/webapp/WEB-INF/common/navigation.jspf`.
+4. Add JUnit 4.13.2 to `pom.xml` as a `test`-scoped dependency and
+   `src/test/java/com/in28minutes/calculator/CalculatorTest.java`, one test
+   of `add` and one of `subtract`. `mvn -q test` compiles the WAR at Java 7
+   and runs it; the maven suite in `dabbler.yaml` selects it by name.
+
+### Session 4: Documentation comments on the calculator
+
+1. Register.
+2. Add Javadoc to `Calculator`, `add` and `subtract`, and to
+   `CalculatorServlet`, `doGet` and `doPost`. No code line changes.
+3. Add a JSP comment (`<%-- --%>`) at the top of
+   `src/main/webapp/WEB-INF/views/calculator.jsp` saying what the page is.
+   No markup changes. `mvn -q test` still compiles and passes.
