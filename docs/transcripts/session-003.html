@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 003 transcript</title>
+<style>
+:root {
+  --page: #ffffff;
+  --ink: #1f1f1f;
+  --faint: #e4e4e4;
+  --panel: #f6f6f6;
+  --tone-milestone: #2a5db0;
+  --tone-good: #256029;
+  --tone-warn: #8a6100;
+  --tone-bad: #a31515;
+  --tone-muted: #6b6b6b;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #1e1e1e;
+    --ink: #d4d4d4;
+    --faint: #3a3a3a;
+    --panel: #252526;
+  --tone-milestone: #3874db;
+  --tone-good: #54a33b;
+  --tone-warn: #b79427;
+  --tone-bad: #f14c4c;
+  --tone-muted: #8c8c8c;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 24px 16px 64px;
+  background: var(--page);
+  color: var(--ink);
+  font: 14px/1.6 ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+}
+main { max-width: 68rem; margin: 0 auto; }
+h1 { font-size: 1.4rem; margin: 0 0 .25rem; }
+h2 { font-size: 1.05rem; margin: 2.5rem 0 .75rem; border-bottom: 1px solid var(--faint); padding-bottom: .3rem; }
+.stamp { color: var(--tone-muted); font-size: .85rem; margin: 0 0 .25rem; }
+.mono, pre, code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+.lines { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 13px; }
+.line { white-space: pre-wrap; word-break: break-word; padding-left: 10.5ch; text-indent: -10.5ch; }
+.at { color: var(--tone-muted); }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid var(--faint); vertical-align: top; }
+th { color: var(--tone-muted); font-weight: 600; }
+details { margin: .5rem 0; }
+summary { cursor: pointer; }
+td details { margin: 0; }
+tr:has(details:not([open])) + tr.findings { display: none; }
+tr.findings > td { padding: 0 0 .5rem 1.5rem; }
+pre { background: var(--panel); padding: .75rem; overflow-x: auto; white-space: pre-wrap; word-break: break-word; font-size: 12.5px; }
+.stop, .cancelled { border-left: 3px solid var(--tone-bad); background: var(--panel); padding: .6rem .9rem; }
+.milestone { color: var(--tone-milestone); }
+.good { color: var(--tone-good); }
+.warn { color: var(--tone-warn); }
+.bad { color: var(--tone-bad); }
+.muted { color: var(--tone-muted); }
+</style>
+</head>
+<body>
+<main>
+<h1>Session 003 transcript</h1>
+<p class="stamp">Rendered 2026-11-10T23:56:21.026Z by dabbler-ai-router 3.31.0 at ce554168ea336d76bf93211d7469e9b21481d649.</p>
+<p class="stamp">Engine cli, last phase <span class="milestone">log</span>, started 2026-11-10T18:54:19.706-05:00.</p>
+<h2>Session Plan</h2>
+<h3>Session 3: The calculator page</h3>
+<ol><li>Register.</li><li>Add <code>src/main/java/com/in28minutes/calculator/Calculator.java</code>, a class with <code>add</code> and <code>subtract</code>, each taking two <code>BigDecimal</code>s and returning their sum or difference, compiled at Java 7 like the rest.</li><li>Add <code>src/main/java/com/in28minutes/calculator/CalculatorServlet.java</code>, mapped with <code>@WebServlet</code> to <code>/calculator.do</code>: GET forwards to the view, POST reads <code>left</code> and <code>right</code>, sets <code>sum</code> and <code>difference</code> on the request and forwards to the view. Add the view, <code>src/main/webapp/WEB-INF/views/calculator.jsp</code>, including the shared header, navigation and footer, and a Calculator link in <code>src/main/webapp/WEB-INF/common/navigation.jspf</code>.</li><li>Add JUnit 4.13.2 to <code>pom.xml</code> as a <code>test</code>-scoped dependency and <code>src/test/java/com/in28minutes/calculator/CalculatorTest.java</code>, one test of <code>add</code> and one of <code>subtract</code>. <code>mvn -q test</code> compiles the WAR at Java 7 and runs it; the maven suite in <code>dabbler.yaml</code> selects it by name.</li></ol>
+<h2>Work Plan</h2>
+<p>Session 3 adds an online calculator page to the servlet WAR inside its existing shape: src/main/java/com/in28minutes/calculator/Calculator.java (add and subtract over BigDecimal), src/main/java/com/in28minutes/calculator/CalculatorServlet.java mapped with @WebServlet to /calculator.do (GET forwards to the view; POST sets sum and difference and forwards), the view src/main/webapp/WEB-INF/views/calculator.jsp with the shared fragments, a Calculator link in src/main/webapp/WEB-INF/common/navigation.jspf, and the repository's first test: JUnit 4.13.2 as a test-scoped dependency in pom.xml and src/test/java/com/in28minutes/calculator/CalculatorTest.java. Everything compiles at the repository's own Java 7; each step is shown by mvn -q test.</p>
+<p>Landed <a href="https://github.com/darndestdabbler/JavaWebApplicationStepByStep/commit/64d8fbf67c1f40b453c39fb3670f2c94e1f7da0a"><code>64d8fbf67c1f40b453c39fb3670f2c94e1f7da0a</code></a>.</p>
+<table>
+<tr><th>Step</th><th>Ask</th><th>Files</th><th>Checks</th><th>Accepted</th></tr>
+<tr><td>Calculator</td><td><p>Add src/main/java/com/in28minutes/calculator/Calculator.java with add and subtract, each taking two BigDecimals and returning one, written in Java 7.</p></td><td><span class="mono">src/main/java/com/in28minutes/calculator/Calculator.java</span></td><td><code>mvn -q test</code></td><td>yes</td></tr>
+<tr><td>Page</td><td><p>Add src/main/java/com/in28minutes/calculator/CalculatorServlet.java mapped to /calculator.do, the view src/main/webapp/WEB-INF/views/calculator.jsp including the shared header, navigation and footer, and a Calculator link in src/main/webapp/WEB-INF/common/navigation.jspf.</p></td><td><span class="mono">src/main/java/com/in28minutes/calculator/CalculatorServlet.java</span><br><span class="mono">src/main/webapp/WEB-INF/views/calculator.jsp</span><br><span class="mono">src/main/webapp/WEB-INF/common/navigation.jspf</span></td><td><code>mvn -q test</code></td><td>yes</td></tr>
+<tr><td>Tests</td><td><p>Add JUnit 4.13.2 to pom.xml as a test-scoped dependency, and src/test/java/com/in28minutes/calculator/CalculatorTest.java with one test of add and one of subtract.</p></td><td><span class="mono">pom.xml</span><br><span class="mono">src/test/java/com/in28minutes/calculator/CalculatorTest.java</span></td><td><code>mvn -q test -Dtest=CalculatorTest</code></td><td>yes</td></tr>
+</table>
+<p>Non-goals:</p>
+<ul><li>No raising of the Java source or target level, and no dependency or plugin change beyond the one test-scoped JUnit dependency</li><li>No documentation comments: session 4 adds them</li><li>No other page changes</li></ul>
+<h2>What the framework said</h2>
+<div class="lines"><div class="line"><span class="at">[23:54:19]</span> <span class="muted">run-started</span> session=003 mode=pull</div>
+<div class="line"><span class="at">[23:54:19]</span> <span class="muted">instruction-issued</span> seq=1 kind=step step=plan</div>
+<div class="line"><span class="at">[23:54:39]</span> <span class="muted">run-resumed</span> session=003 phase=<span class="milestone">plan</span> mode=pull</div>
+<div class="line"><span class="at">[23:54:39]</span> <span class="muted">plan-accepted</span> steps=[&quot;calculator&quot;,&quot;page&quot;,&quot;tests&quot;] non_goals=3</div>
+<div class="line"><span class="at">[23:54:39]</span> <span class="milestone">phase</span> phase=<span class="milestone">work</span></div>
+<div class="line"><span class="at">[23:54:39]</span> <span class="muted">instruction-issued</span> seq=2 kind=step step=calculator</div>
+<div class="line"><span class="at">[23:54:47]</span> <span class="muted">run-resumed</span> session=003 phase=<span class="milestone">work</span> mode=pull</div>
+<div class="line"><span class="at">[23:54:50]</span> <span class="muted">check-passed</span> step=calculator argv=[&quot;mvn&quot;,&quot;-q&quot;,&quot;test&quot;]</div>
+<div class="line"><span class="at">[23:54:50]</span> <span class="muted">report-accepted</span> seq=2 step=calculator files=[&quot;src/main/java/com/in28minutes/calculator/Calculator.java&quot;] notes=Calculator with add and subtract over BigDecimal, Java 7</div>
+<div class="line"><span class="at">[23:54:50]</span> <span class="muted">instruction-issued</span> seq=3 kind=step step=page</div>
+<div class="line"><span class="at">[23:55:11]</span> <span class="muted">run-resumed</span> session=003 phase=<span class="milestone">work</span> mode=pull</div>
+<div class="line"><span class="at">[23:55:13]</span> <span class="muted">check-passed</span> step=page argv=[&quot;mvn&quot;,&quot;-q&quot;,&quot;test&quot;]</div>
+<div class="line"><span class="at">[23:55:14]</span> <span class="muted">report-accepted</span> seq=3 step=page files=[&quot;src/main/java/com/in28minutes/calculator/CalculatorServlet.java&quot;,&quot;src/main/webapp/WEB-INF/views/calculator.jsp&quot;,&quot;src/main/webapp/WEB-INF/common/navigation.jspf&quot;] notes=CalculatorServlet at /calculator.do, calculator.jsp with the shared fragments, a navigation link</div>
+<div class="line"><span class="at">[23:55:14]</span> <span class="muted">instruction-issued</span> seq=4 kind=step step=tests</div>
+<div class="line"><span class="at">[23:55:37]</span> <span class="muted">run-resumed</span> session=003 phase=<span class="milestone">work</span> mode=pull</div>
+<div class="line"><span class="at">[23:55:40]</span> <span class="muted">check-passed</span> step=tests argv=[&quot;mvn&quot;,&quot;-q&quot;,&quot;test&quot;,&quot;-Dtest=CalculatorTest&quot;]</div>
+<div class="line"><span class="at">[23:55:43]</span> <span class="muted">named-tests-passed</span> step=tests suite=maven command=mvn -q test -Dtest=CalculatorTest -Dsurefire.failIfNoSpecifiedTests=false</div>
+<div class="line"><span class="at">[23:55:43]</span> <span class="muted">report-accepted</span> seq=4 step=tests files=[&quot;pom.xml&quot;,&quot;src/test/java/com/in28minutes/calculator/CalculatorTest.java&quot;] notes=The repository's first test: JUnit 4.13.2 test-scoped, CalculatorTest add and subtract, green under JDK 11 at Java 7</div>
+<div class="line"><span class="at">[23:55:43]</span> <span class="milestone">phase</span> phase=<span class="milestone">preverify</span></div>
+<div class="line"><span class="at">[23:55:43]</span> <span class="milestone">phase</span> phase=<span class="milestone">verify</span></div>
+<div class="line"><span class="at">[23:55:43]</span> <span class="muted">job-started</span> name=verification pid=6640 log=.dabbler/runs/s3/driver/jobs/verification.log</div>
+<div class="line"><span class="at">[23:56:10]</span> <span class="muted">job-finished</span> name=verification exit=<span class="good">0</span> log=.dabbler/runs/s3/driver/jobs/verification.log</div>
+<div class="line"><span class="at">[23:56:10]</span> <span class="muted">verification-passed</span></div>
+<div class="line"><span class="at">[23:56:10]</span> <span class="milestone">phase</span> phase=<span class="milestone">run-of-record</span></div>
+<div class="line"><span class="at">[23:56:11]</span> <span class="muted">run-of-record</span> suite=maven stage=final-full why=the last whole run of maven took 2s, within 60s command=mvn -q test</div>
+<div class="line"><span class="at">[23:56:11]</span> <span class="muted">job-started</span> name=run of record: maven pid=40080 log=.dabbler/runs/s3/driver/jobs/run-of-record-maven.log</div>
+<div class="line"><span class="at">[23:56:14]</span> <span class="muted">job-finished</span> name=run of record: maven exit=<span class="good">0</span> log=.dabbler/runs/s3/driver/jobs/run-of-record-maven.log</div>
+<div class="line"><span class="at">[23:56:14]</span> <span class="milestone">phase</span> phase=<span class="milestone">land</span></div>
+<div class="line"><span class="at">[23:56:16]</span> <span class="muted">landed</span> commit=64d8fbf67c1f40b453c39fb3670f2c94e1f7da0a</div>
+<div class="line"><span class="at">[23:56:16]</span> <span class="milestone">phase</span> phase=<span class="milestone">publish</span></div>
+<div class="line"><span class="at">[23:56:16]</span> <span class="muted">publish-skipped</span> reason=an ordinary session never publishes</div>
+<div class="line"><span class="at">[23:56:16]</span> <span class="milestone">phase</span> phase=<span class="milestone">close</span></div>
+<div class="line"><span class="at">[23:56:16]</span> <span class="muted">job-started</span> name=close pid=9168 log=.dabbler/runs/s3/driver/jobs/close.log</div>
+<div class="line"><span class="at">[23:56:21]</span> <span class="muted">job-finished</span> name=close exit=<span class="good">0</span> log=.dabbler/runs/s3/driver/jobs/close.log</div>
+<div class="line"><span class="at">[23:56:21]</span> <span class="milestone">phase</span> phase=<span class="milestone">log</span></div></div>
+<h2>Verification</h2>
+<table>
+<tr><th>Round</th><th>Phase</th><th>Verdict</th><th>Reviewer</th><th>Provider</th><th>Transport</th><th>Findings</th></tr>
+<tr><td>1</td><td>full</td><td><span class="good">VERIFIED</span></td><td>gpt-5.6-terra</td><td>openai</td><td>api</td><td><details><summary>1 finding</summary></details></td></tr><tr class="findings"><td colspan="7"><table>
+<tr><th>#</th><th>Severity</th><th>Finding</th><th>Response</th></tr>
+<tr><td>0</td><td><strong>minor</strong></td><td>**Nit:** No visible test exercises the servlet’s specified POST behavior. A useful test would start with mocked request/response/dispatcher objects, provide `left=2.5` and `right=4`, invoke `doPost`, and assert request attributes `sum == new BigDecimal(&quot;6.5&quot;)` and `difference == new BigDecimal(&quot;-1.5&quot;)` plus a forward to `/WEB-INF/views/calculator.jsp`. Today’s implementation appears to satisfy those expectations; this is regression coverage only.</td><td>not answered</td></tr>
+</table></td></tr>
+</table>
+<h2>Test runs</h2>
+<table>
+<tr><th>Suite</th><th>Stage</th><th>Outcome</th><th>Duration</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Command</th></tr>
+<tr><td>maven</td><td>final-full</td><td><span class="good">passed</span></td><td>3s</td><td></td><td></td><td></td><td><span class="mono">mvn -q test</span></td></tr>
+</table>
+<h2>Jobs</h2>
+<div><strong>close</strong> exit <span class="good">0</span> <span class="muted">(passed -- output not carried; dabbler transcript --full carries it)</span></div>
+<div><strong>run-of-record-maven</strong> exit <span class="good">0</span> <span class="muted">(passed -- output not carried; dabbler transcript --full carries it)</span></div>
+<div><strong>verification</strong> exit <span class="good">0</span> <span class="muted">(passed -- output not carried; dabbler transcript --full carries it)</span></div>
+</main>
+</body>
+</html>
