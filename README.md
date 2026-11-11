@@ -1,3 +1,5 @@
+# README.md modification by human operator on 2026-11-11
+
 # Java Web Application in 25 Easy Steps
 
 [![Image](https://www.springboottutorial.com/images/Course-Java-Servlets-and-JSP-BuildJavaEEAppIn25Steps.png "Java Servlets and JSP - Build Java EE(JEE) app in 25 Steps")](https://www.udemy.com/course/learn-java-servlets-and-jsp-web-application-in-25-steps/)
